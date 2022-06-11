@@ -130,7 +130,27 @@ ARC ensures that class intances doesn't get deallocated as long as a property, c
 
 Again, ARC keeps count of the number of references to a class instance. A reference count. It does this to understand when it is safe to dispose a class instance.
 
+To demonstrate the job of ARC, we can store another reference to the `Device` instance we created with `lucasDevice` to `chabbyDevice`. Doing this, both of them will point to the same `Device` instance and only one `Device` instance is in the memory.
 
+
+```swift
+chabbyDevice = lucasDevice
+```
+
+Now, the reference count of the `Device` instance is 2. We can decrement this by setting `lucasDevice` to nil, but because `chabbyDevice` continues to hold a reference to the `Device` instance, it doesn't get deallocated yet. This proves that both constants point to a same instance.
+
+```swift
+lucasDevice = nil
+```
+
+
+The moment we set `chabbyDevice` to nil, the `Device` instance it holds doesn't have a reference anymore, therefore the `Device` instance gets deallocated and this means that the memory it takes is now freed. That is the goal of ARC. We can verify this using the `deinit` method from the class
+
+```swift
+deinit {
+    print("\(model) is now deallocated")
+}
+```
 
 
 
