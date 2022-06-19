@@ -22,9 +22,20 @@ class SecondViewController: UIViewController {
 //            self?.updateView()
 //        }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.updateView()
+        /*
+         One way to debug this is:
+         
+         - Edit scheme
+         - Diagnostics
+         - Malloc Stack Logging (in order to see the stack call in debug navigator the backtraces)
+         */
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+//            guard let strongSelf = self else { return }
+//            strongSelf.updateView()
+//        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.updateView()
         }
     }
     
